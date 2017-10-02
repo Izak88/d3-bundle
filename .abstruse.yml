@@ -1,7 +1,7 @@
 image: abstruse
 
 matrix:
-  - env: NODE_VERSION: 8
+  - env: NODE_VERSION=8
 
 preinstall:
   - npm config set spin false
@@ -11,8 +11,8 @@ install:
   - nvm install $NODE_VERSION
   - npm install
 
-test:
+script:
   - npm run-script test
 
-cache
+cache:
   - node_modules
