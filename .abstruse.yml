@@ -1,18 +1,38 @@
-language: node_js
-
-git:
-  depth: 3
+image: abstruse
 
 matrix:
-  - node_js: "8"
-    env: SCRIPT=test
+  - env: NODE_VERSION=8
 
 preinstall:
   - npm config set spin false
   - npm config set progress false
+  - npm i
+  - echo 'test'
+  - echo $NODE_VERSION
+  - echo $accessKeyId
+  - echo $region
+
+before_deploy:
+  - nvm install 8
+  - npm install
+  - npm run pretest
+
+script:
+  - npm run-script test
+
+deploy:
+  - provider: elastic
+  - application: "d3-test"
+  - environmentName: "testEnv"
+  - solutionStackName: "64bit Amazon Linux 2017.09 v4.4.0 running Node.js"
 
 install:
+  - nvm install $NODE_VERSION
   - npm install
+  - echo 'test'
+  - echo $NODE_VERSION
+  - echo $region
+  - echo $accessKeyId
 
-test:
-  - if [[ "$SCRIPT" ]]; then npm run-script $SCRIPT; fi
+cache:
+  - node_modules

@@ -1,0 +1,13 @@
+version: 0.0
+os: linux
+files:
+  - source: ./
+    destination: ./
+version: 0.1
+os: linux
+files:
+  - source: ./
+    destination: ./
+test
+test2
+test3
