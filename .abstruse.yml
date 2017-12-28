@@ -1,7 +1,10 @@
 image: abstruse
 
 matrix:
-  - env: NODE_VERSION=8
+  - env: NODE_VERSION=8 TEST=0
+  - env: NODE_VERSION=8 TEST=1
+  - allow_failures:
+    - env: NODE_VERSION=8 TEST=1
 
 preinstall:
   - npm config set spin false
